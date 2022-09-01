@@ -1,5 +1,5 @@
 /* Creating an array of objects. */
-const posts = [
+let posts = [
   {
     name: "Vincent van Gogh",
     username: "vincey1853",
@@ -8,6 +8,7 @@ const posts = [
     post: "images/post-vangogh.jpg",
     comment: "just took a few mushrooms lol",
     likes: 21,
+    doneLike: false,
   },
   {
     name: "Gustave Courbet",
@@ -17,6 +18,7 @@ const posts = [
     post: "images/post-courbet.jpg",
     comment: "i'm feelin a bit stressed tbh",
     likes: 4,
+    doneLike: false,
   },
   {
     name: "Joseph Ducreux",
@@ -27,6 +29,7 @@ const posts = [
     comment:
       "gm friends! which coin are YOU stacking up today?? post below and WAGMI!",
     likes: 152,
+    doneLike: false,
   },
 ];
 
@@ -79,53 +82,66 @@ function render() {
 render();
 
 
-
 /* Adding an event listener to the like icon of each post. When the like icon is clicked, it calls the
 addLike function and passes the index of the post as a parameter. */
 document.getElementById("like-icon0").addEventListener("click", function(){
-  addLike("0");
+  doLike(0)
 });
 
 document.getElementById("like-icon1").addEventListener("click", function(){
-  addLike("1");
+  doLike(1)
 });
 
 document.getElementById("like-icon2").addEventListener("click", function(){
-  addLike("2");
+  doLike(2)
 });
-
 
 
 /* Adding an event listener to the post image of each post. When the post image is double clicked, it
 calls the addLike function and passes the index of the post as a parameter. */
 document.getElementById("post0").addEventListener("dblclick" , function(){
-  addLike("0");
+  doLike(0)
 });
 
 document.getElementById("post1").addEventListener("dblclick", function(){
-  addLike("1");
+  doLike(1)
 });
 
 document.getElementById("post2").addEventListener("dblclick", function(){
-  addLike("2");
+  doLike(2)
 });
 
 
-
 /**
- * The function takes in an index, finds the element with the ID "likes" + index, parses the innerHTML
- * of that element to an integer, adds 1 to that integer, and then sets the innerHTML of that element
- * to the new integer + " likes"
- * @param index - the index of the post in the array of posts
+ * If the post has not been liked, then add a like. If the post has been liked, then remove a like
+ * @param index - the index of the post in the posts array
  */
-function addLike(index){
-  let IDcounter = "likes";
-  IDcounter += index;
-
-  let likeCounter = document.getElementById(IDcounter);
-  let likeCounterValue = parseInt(likeCounter.innerHTML);
-  let newlikes = likeCounterValue +1;
-  likeCounter.innerHTML = `${newlikes} likes`;
+function doLike(index){
+  if (posts[index].doneLike == false){
+    moreLikes(index)
+  } else {
+    lessLikes(index)
+  }
 }
 
 
+/**
+ * If the user has not liked the post, then the user can like the post. If the user has liked the post,
+ * then the user can unlike the post
+ * @param index - the index of the post in the posts array
+ */
+function moreLikes(index){
+  posts[index].likes +=1;
+  let element = document.getElementById(`likes${index}`)
+  element.innerHTML = `<h3 id="likes${index}" class="enfasis">${posts[index].likes} likes</h3>`
+  posts[index].doneLike = true;
+  document.getElementById(`like-icon${index}`).src="images/icon-heart-like.png";
+}
+
+function lessLikes(index){
+  posts[index].likes -=1;
+  let element = document.getElementById(`likes${index}`)
+  element.innerHTML = `<h3 id="likes${index}" class="enfasis">${posts[index].likes} likes</h3>`
+  posts[index].doneLike = false;
+  document.getElementById(`like-icon${index}`).src="images/icon-heart.png";
+}
