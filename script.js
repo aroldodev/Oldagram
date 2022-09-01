@@ -43,15 +43,15 @@ function publishPost(index) {
     </div>
   </div>
 
-  <img id="post" class="card-post" src=${posts[index].post}>
+  <img id="post${index}" class="card-post" src=${posts[index].post}>
   
   <div class="card-details">
     <div class="card-details-icons">
-      <img class="icon" src="images/icon-heart.png" alt="">
+      <img id="like-icon${index}" class="icon" src="images/icon-heart.png" alt="">
       <img class="icon" src="images/icon-comment.png" alt="">
       <img class="icon" src="images/icon-dm.png" alt="">
     </div>
-    <h3 id="likes" class="enfasis">${posts[index].likes} likes</h3>
+    <h3 id="likes${index}" class="enfasis">${posts[index].likes} likes</h3>
     <p id="comment" class="card-details-comment"><span id ="username" class="enfasis">${posts[index].username} </span>   ${posts[index].comment}</p>
   </div>
 </section>`;
@@ -65,3 +65,41 @@ function render() {
 }
 
 render();
+
+
+
+document.getElementById("like-icon0").addEventListener("click", function(){
+  addLike("0");
+});
+
+document.getElementById("like-icon1").addEventListener("click", function(){
+  addLike("1");
+});
+
+document.getElementById("like-icon2").addEventListener("click", function(){
+  addLike("2");
+});
+
+
+function addLike(index){
+  let IDcounter = "likes";
+  IDcounter += index;
+
+  let likeCounter = document.getElementById(IDcounter);
+  let likeCounterValue = parseInt(likeCounter.innerHTML);
+  let newlikes = likeCounterValue +1;
+  likeCounter.innerHTML = `${newlikes} likes`;
+}
+
+
+document.getElementById("post0").addEventListener("dblclick" , function(){
+  addLike("0");
+});
+
+document.getElementById("post1").addEventListener("dblclick", function(){
+  addLike("1");
+});
+
+document.getElementById("post2").addEventListener("dblclick", function(){
+  addLike("2");
+});
