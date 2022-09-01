@@ -80,6 +80,17 @@ document.getElementById("like-icon2").addEventListener("click", function(){
   addLike("2");
 });
 
+document.getElementById("post0").addEventListener("dblclick" , function(){
+  addLike("0");
+});
+
+document.getElementById("post1").addEventListener("dblclick", function(){
+  addLike("1");
+});
+
+document.getElementById("post2").addEventListener("dblclick", function(){
+  addLike("2");
+});
 
 function addLike(index){
   let IDcounter = "likes";
@@ -92,14 +103,3 @@ function addLike(index){
 }
 
 
-document.getElementById("post0").addEventListener("dblclick" , function(){
-  addLike("0");
-});
-
-document.getElementById("post1").addEventListener("dblclick", function(){
-  addLike("1");
-});
-
-document.getElementById("post2").addEventListener("dblclick", function(){
-  addLike("2");
-});
