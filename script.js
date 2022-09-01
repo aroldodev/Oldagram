@@ -1,3 +1,4 @@
+/* Creating an array of objects. */
 const posts = [
   {
     name: "Vincent van Gogh",
@@ -29,10 +30,16 @@ const posts = [
   },
 ];
 
+/* Creating a variable called card_container and assigning it to the element with the id of
+card-container. It is also creating a variable called renderedPosts and assigning it to an empty
+string. */
 let card_container = document.getElementById("card-container");
-
 let renderedPosts = "";
 
+/**
+ * It takes the index of the post and renders the post in the HTML
+ * @param index - the index of the post in the posts array
+ */
 function publishPost(index) {
   renderedPosts += `<section class="card">
   <div class="card-user">
@@ -57,6 +64,10 @@ function publishPost(index) {
 </section>`;
 }
 
+/**
+ * It loops through the posts array, calls the publishPost function for each post, and then sets the
+ * innerHTML of the card_container element to the renderedPosts variable
+ */
 function render() {
   for (let i = 0; i < posts.length; i++) {
     publishPost(i);
@@ -64,10 +75,13 @@ function render() {
   card_container.innerHTML = renderedPosts;
 }
 
+/* Calling the render function. */
 render();
 
 
 
+/* Adding an event listener to the like icon of each post. When the like icon is clicked, it calls the
+addLike function and passes the index of the post as a parameter. */
 document.getElementById("like-icon0").addEventListener("click", function(){
   addLike("0");
 });
@@ -80,6 +94,10 @@ document.getElementById("like-icon2").addEventListener("click", function(){
   addLike("2");
 });
 
+
+
+/* Adding an event listener to the post image of each post. When the post image is double clicked, it
+calls the addLike function and passes the index of the post as a parameter. */
 document.getElementById("post0").addEventListener("dblclick" , function(){
   addLike("0");
 });
@@ -92,6 +110,14 @@ document.getElementById("post2").addEventListener("dblclick", function(){
   addLike("2");
 });
 
+
+
+/**
+ * The function takes in an index, finds the element with the ID "likes" + index, parses the innerHTML
+ * of that element to an integer, adds 1 to that integer, and then sets the innerHTML of that element
+ * to the new integer + " likes"
+ * @param index - the index of the post in the array of posts
+ */
 function addLike(index){
   let IDcounter = "likes";
   IDcounter += index;
